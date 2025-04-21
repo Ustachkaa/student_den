@@ -205,9 +205,30 @@ class StudentRegistrationScreen extends StatelessWidget {
             final password = state.passwordController?.text.trim() ?? '';
             final confirmPassword = state.confirmPasswordController?.text.trim() ?? '';
 
+            final emailValid = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
+            final passwordValid = RegExp(
+              r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&.,])[A-Za-z\d@$!%?&.,]{8,}$',
+            ).hasMatch(password);
+
             if (fullName.isEmpty || email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text("Please fill in all required fields.")),
+              );
+              return;
+            }
+
+            if (!emailValid) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Please enter a valid email address.")),
+              );
+              return;
+            }
+
+            if (!passwordValid) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Password must be at least 8 characters, include an uppercase letter, a number, and a special character."),
+                ),
               );
               return;
             }

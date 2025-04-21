@@ -182,38 +182,26 @@ class LoginScreen extends StatelessWidget {
   }
 
   Widget _buildFooterSection(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "msg_not_a_member_are".tr,
-          style: theme.textTheme.labelMedium,
-        ),
-        SizedBox(height: 8.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: Text(
-                "Service Provider",
-                style: CustomTextStyles.labelMediumOnSecondaryContainer,
-              ),
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Not a member? Register as a",
+            style: theme.textTheme.labelMedium,
+          ),
+          SizedBox(height: 8.h),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, AppRoutes.studentRegistrationScreen);
+            },
+            child: Text(
+              "Student!",
+              style: CustomTextStyles.labelMediumOnSecondaryContainer_1,
             ),
-            Text(
-              " or ",
-              style: CustomTextStyles.labelMediumGray600,
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, AppRoutes.studentRegistrationScreen);
-              },
-              child: Text(
-                "Student?",
-                style: CustomTextStyles.labelMediumOnSecondaryContainer_1,
-              ),
-            ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 }
