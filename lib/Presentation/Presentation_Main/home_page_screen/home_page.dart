@@ -7,6 +7,7 @@ import 'package:student_den/widgets/custom_bottom_bar.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/model/offer.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/widgets/offer_card.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/offer_detail_page.dart';
+import '../unified_category_screen.dart';
 import 'bloc/home_page_bloc.dart';
 import 'models/home_page_model.dart';
 import 'widgets/home_category_section.dart';
@@ -106,30 +107,15 @@ class HomePage extends StatelessWidget {
   }
 
   void _navigateToCategoryPage(BuildContext context, String categoryTitle) {
-    final route = _getRouteForCategory(categoryTitle);
-    if (route != null) {
-      Navigator.pushNamed(context, route);
-    } else {
-      print('No route found for category: $categoryTitle');
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => UnifiedCategoryScreen.builder(
+          context,
+          category: categoryTitle,
+        ),
+      ),
+    );
   }
 
-  String? _getRouteForCategory(String title) {
-    switch (title.toLowerCase()) {
-      case 'activities':
-        return AppRoutes.activitiesCategoryPage;
-      case 'discounts':
-        return AppRoutes.discountCategoryPage;
-      case 'jobs':
-        return AppRoutes.jobCategoryPage;
-      case 'news':
-        return AppRoutes.newsCategoryPage;
-      case 'leisure':
-        return AppRoutes.leisureCategoryPage;
-      case 'handy work':
-        return AppRoutes.handyWorkCategoryPage;
-      default:
-        return null;
-    }
-  }
 }

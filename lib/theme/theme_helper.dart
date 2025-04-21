@@ -186,4 +186,5 @@ class LightCodeColors {
 
   // White
   Color get whiteA700 => Color(0XFFFFFFFF);
+
 }

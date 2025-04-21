@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:student_den/Presentation/Presentation_Main/activities_category_page/activities_category_screen.dart';
+//import 'package:student_den/Presentation/Presentation_Main/activities_category_page/activities_category_screen.dart';
 import '../../../core/app_export.dart';
+import '../../../theme/icon_button_style_helper.dart';
 import '../../../widgets/app_bar/appbar_leading_image.dart';
 import '../../../widgets/app_bar/appbar_trailing_image.dart';
 import '../../../widgets/app_bar/custom_app_bar.dart';
@@ -190,7 +191,7 @@ class LikedScreen extends StatelessWidget {
                   height: 48.h,
                   width: 48.h,
                   padding: EdgeInsets.all(8.h),
-                  decoration: IconButtonStyleHelper.none,
+                  decoration: IconButtonStyleHelper.fillPrimaryContainer,
                   child: CustomImageView(
                     imagePath: ImageConstant.thumbsUp,
                   ),
