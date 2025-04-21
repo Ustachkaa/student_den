@@ -72,7 +72,7 @@ class PersonScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: _buildBottombar(context),
+      bottomNavigationBar: _buildBottomBar(context),
     );
   }
 
@@ -416,33 +416,25 @@ class PersonScreen extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildBottombar(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CustomBottomBar(
-        onChanged: (type) {
-          Navigator.pushNamed(
-            navigatorKey.currentContext!,
-            getCurrentRoute(type as BottomBarEnum),
-          );
-          // Return a value to make it a dynamic function instead of Null function
-          return null;
-        },
-      ),
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(
+      onChanged: (dynamic type) {
+        Navigator.pushNamed(context, getCurrentRoute(type));
+      },
     );
   }
 
   /// Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  /// Handling route based on bottom click actions
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
+      case ButtomBarEnum.Favorite:
         return AppRoutes.likedScreen;
-      case BottomBarEnum.Home:
-        return AppRoutes.homePage;
-      case BottomBarEnum.SearchwhiteA700:
+      case ButtomBarEnum.Searchwhitea700:
         return AppRoutes.filterPage;
-      case BottomBarEnum.Lock:
+      case ButtomBarEnum.Lock:
         return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }

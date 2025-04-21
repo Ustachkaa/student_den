@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/app_export.dart';
 
 /// Define the ButtomBarEnum
-enum ButtomBarEnum { Favorite, Home, Searchwhitea700, Lock }
+enum ButtomBarEnum { Home, Favorite, Searchwhitea700, Lock }
 
 //ignore_for_file: must_be_immutable
 ///Create a custom Bottom Navigation Bar
@@ -26,23 +27,23 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   /// Add all the button navigation you want to implement
   List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
-      icon: ImageConstant.favorite,
-      activeIcon: ImageConstant.favorite,
-      type: ButtomBarEnum.Favorite,
-    ),
-    BottomMenuModel(
-      icon: ImageConstant.home,
-      activeIcon: ImageConstant.home,
+      icon: "assets/images/home-icon.svg",
+      activeIcon: "assets/images/home-icon.svg",
       type: ButtomBarEnum.Home,
     ),
     BottomMenuModel(
-      icon: ImageConstant.searchwhitea700,
-      activeIcon: ImageConstant.searchwhitea700,
+      icon: "assets/images/favorite.svg",
+      activeIcon: "assets/images/favorite.svg",
+      type: ButtomBarEnum.Favorite,
+    ),
+    BottomMenuModel(
+      icon: "assets/images/search_icon.svg",
+      activeIcon: "assets/images/search_icon.svg",
       type: ButtomBarEnum.Searchwhitea700,
     ),
     BottomMenuModel(
-      icon: ImageConstant.lock,
-      activeIcon: ImageConstant.lock,
+      icon: "assets/images/user_lock.svg",
+      activeIcon: "assets/images/user_lock.svg",
       type: ButtomBarEnum.Lock,
     ),
   ];
@@ -66,16 +67,14 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
           return BottomNavigationBarItem(
-            icon: CustomImageView(
-              imagePath: bottomMenuList[index].icon,
+            icon: SvgPicture.asset(
+              bottomMenuList[index].icon,
               height: 32.h,
-              width: 34.h,
               color: appTheme.whiteA700,
             ),
-            activeIcon: CustomImageView(
-              imagePath: bottomMenuList[index].activeIcon,
-              height: 22.h,
-              width: 28.h,
+            activeIcon: SvgPicture.asset(
+              bottomMenuList[index].activeIcon,
+              height: 28.h,
               color: appTheme.whiteA700,
             ),
             label: "",

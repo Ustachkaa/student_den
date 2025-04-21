@@ -15,8 +15,6 @@ import 'package:student_den/Presentation/Presentation_Main/leisure_category_page
 import 'package:student_den/Presentation/Presentation_Main/news_category_page/news_category_page.dart';
 import 'package:student_den/Presentation/Presentation_Main/handy_work_category_page/handy_work_category_page.dart';
 
-// Define BottomBarEnum if missing
-enum BottomBarEnum { Favorite, Home, SearchwhiteA700, Lock }
 
 class DiscountCategoryPage extends StatefulWidget {
   const DiscountCategoryPage({Key? key}) : super(key: key);
@@ -89,31 +87,23 @@ class DiscountCategoryPageState extends State<DiscountCategoryPage>
     );
   }
 
-  /// Section Widget
   Widget _buildBottomBar(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CustomBottomBar(
-        onChanged: (dynamic type) {
-          Navigator.pushNamed(
-            context,
-            getCurrentRoute(type),
-          );
-        },
-      ),
+    return CustomBottomBar(
+      onChanged: (dynamic type) {
+        Navigator.pushNamed(context, getCurrentRoute(type));
+      },
     );
   }
 
-  /// Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
-        return AppRoutes.likedScreen; // Replace with your favorite route
-      case BottomBarEnum.SearchwhiteA700:
-        return AppRoutes.filterPage; // Replace with your search route
-      case BottomBarEnum.Lock:
-        return AppRoutes.personScreen; // Replace with your profile route
-      case BottomBarEnum.Home:
+      case ButtomBarEnum.Favorite:
+        return AppRoutes.likedScreen;
+      case ButtomBarEnum.Searchwhitea700:
+        return AppRoutes.filterPage;
+      case ButtomBarEnum.Lock:
+        return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }

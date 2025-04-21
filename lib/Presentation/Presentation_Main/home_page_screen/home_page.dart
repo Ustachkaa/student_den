@@ -11,13 +11,6 @@ import 'bloc/home_page_bloc.dart';
 import 'models/home_page_model.dart';
 import 'widgets/home_category_section.dart';
 
-// Define BottomBarEnum if missing
-enum BottomBarEnum {
-  Home,
-  Favorite,
-  SearchwhiteA700,
-  Lock,
-}
 
 // Define IconButtonStyleHelper if missing
 class IconButtonStyleHelper {
@@ -42,15 +35,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: appTheme.whiteA700,
       resizeToAvoidBottomInset: false,
-      appBar: _buildAppBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.only(bottom: 80.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSearchRow(context),
-              SizedBox(height: 24.h),
+              // Removed SizedBox(height: 24.h) -  AppBar already provides spacing
               BlocBuilder<HomePageBloc, HomePageState>(
                 builder: (context, state) {
                   if (state is HomePageLoading) {
@@ -92,89 +83,6 @@ class HomePage extends StatelessWidget {
   }
 
   /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      toolbarHeight: 60.h,
-      title: Padding(
-        padding: EdgeInsets.only(left: 26.h),
-        child: CustomImageView(
-          imagePath: "assets/images/Logo.png", // Replace with your actual logo path
-          height: 30.h, // Use .h directly if adaptSize is not working
-          width: 30.h, // Use .w directly if adaptSize is not working
-        ),
-      ),
-      actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 26.h),
-          child: CustomImageView(
-            imagePath: "assets/images/User-image.png", // Replace with your actual user profile image path
-            height: 30.h,
-            width: 30.h,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildSearchRow(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 26.h, right: 26.h),
-      child: Row(
-        children: [
-          Expanded(
-            child: CustomSearchView(
-              controller: TextEditingController(),
-              hintText: "Search",
-              prefix: Padding(
-                padding: EdgeInsets.all(10.h),
-                child: CustomImageView(
-                  imagePath: ImageConstant.search,
-                  height: 20.h,
-                  width: 20.h,
-                ),
-              ),
-              prefixConstraints: BoxConstraints(
-                maxHeight: 40.h,
-              ),
-              suffix: Padding(
-                padding: EdgeInsets.only(right: 15.h),
-                child: IconButton(
-                  onPressed: () {
-                    // Implement search functionality
-                  },
-                  icon: Icon(
-                    Icons.clear,
-                    color: Colors.grey.shade600,
-                  ),
-                ),
-              ),
-              suffixConstraints: BoxConstraints(
-                maxHeight: 40.h,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 12.h),
-            child: CustomIconButton(
-              height: 40.h,
-              width: 40.h,
-              padding: EdgeInsets.all(8.h),
-              decoration: IconButtonStyleHelper.fillPrimaryContainer,
-              child: CustomImageView(
-                imagePath: ImageConstant.user, // Replace with your filter icon path
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(
       onChanged: (dynamic type) {
@@ -183,22 +91,45 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /// Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
-        return AppRoutes.likedScreen; // Replace with your favorite route
-      case BottomBarEnum.SearchwhiteA700:
-        return AppRoutes.filterPage; // Replace with your search route
-      case BottomBarEnum.Lock:
-        return AppRoutes.personScreen; // Replace with your profile route
-      case BottomBarEnum.Home:
+      case ButtomBarEnum.Favorite:
+        return AppRoutes.likedScreen;
+      case ButtomBarEnum.Searchwhitea700:
+        return AppRoutes.filterPage;
+      case ButtomBarEnum.Lock:
+        return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }
   }
 
-  void _navigateToCategoryPage(BuildContext context, String categoryRoute) {
-    Navigator.pushNamed(context, '/$categoryRoute'); // Define your category routes
+  void _navigateToCategoryPage(BuildContext context, String categoryTitle) {
+    final route = _getRouteForCategory(categoryTitle);
+    if (route != null) {
+      Navigator.pushNamed(context, route);
+    } else {
+      print('No route found for category: $categoryTitle');
+    }
+  }
+
+  String? _getRouteForCategory(String title) {
+    switch (title.toLowerCase()) {
+      case 'activities':
+        return AppRoutes.activitiesCategoryPage;
+      case 'discounts':
+        return AppRoutes.discountCategoryPage;
+      case 'jobs':
+        return AppRoutes.jobCategoryPage;
+      case 'news':
+        return AppRoutes.newsCategoryPage;
+      case 'leisure':
+        return AppRoutes.leisureCategoryPage;
+      case 'handy work':
+        return AppRoutes.handyWorkCategoryPage;
+      default:
+        return null;
+    }
   }
 }

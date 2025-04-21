@@ -482,7 +482,7 @@ class SettingsPage extends StatelessWidget {
         onChanged: (ButtomBarEnum type) { // Changed to match the expected type
           Navigator.pushNamed(
             context, // Use context instead of navigatorKey
-            getCurrentRoute(type as BottomBarEnum),
+            getCurrentRoute(type),
           );
         },
       ),
@@ -555,17 +555,16 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  /// Handling route based on bottom click actions
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
+      case ButtomBarEnum.Favorite:
         return AppRoutes.likedScreen;
-      case BottomBarEnum.Home:
-        return AppRoutes.homePage;
-      case BottomBarEnum.SearchwhiteA700:
+      case ButtomBarEnum.Searchwhitea700:
         return AppRoutes.filterPage;
-      case BottomBarEnum.Lock:
+      case ButtomBarEnum.Lock:
         return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }

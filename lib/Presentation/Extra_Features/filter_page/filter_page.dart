@@ -119,7 +119,7 @@ class FilterPage extends StatelessWidget {
       ),
       bottomNavigationBar: SizedBox(
         width: double.maxFinite,
-        child: _buildBottomNavigation(context),
+        child: _buildBottomBar(context),
       ),
     );
   }
@@ -449,30 +449,24 @@ class FilterPage extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildBottomNavigation(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CustomBottomBar(
-        // Fix 5: Use the correct ButtomBarEnum type from custom_bottom_bar.dart
-        onChanged: (ButtomBarEnum type) {
-          Navigator.pushNamed(
-              navigatorKey.currentContext!, getCurrentRoute(type));
-        },
-      ),
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(
+      onChanged: (dynamic type) {
+        Navigator.pushNamed(context, getCurrentRoute(type));
+      },
     );
   }
 
-  ///Handling route based on bottom click actions
+  /// Handling route based on bottom click actions
   String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
       case ButtomBarEnum.Favorite:
         return AppRoutes.likedScreen;
-      case ButtomBarEnum.Home:
-        return AppRoutes.homePage;
       case ButtomBarEnum.Searchwhitea700:
         return AppRoutes.filterPage;
       case ButtomBarEnum.Lock:
         return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }

@@ -131,7 +131,7 @@ class LikedScreen extends StatelessWidget {
       ),
       bottomNavigationBar: SizedBox(
         width: double.maxFinite,
-        child: _buildBottomNavigationBar(context),
+        child: _buildBottomBar(context),
       ),
     );
   }
@@ -390,21 +390,11 @@ class LikedScreen extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: CustomBottomBar(
-        onChanged: (type) {
-          // Use the correct enum type from custom_bottom_bar.dart
-          Navigator.pushNamed(
-            navigatorKey.currentContext!,
-            getCurrentRoute(type as BottomBarEnum),
-          );
-          // Return a value to satisfy the dynamic return type
-          return;
-        },
-      ),
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(
+      onChanged: (dynamic type) {
+        Navigator.pushNamed(context, getCurrentRoute(type));
+      },
     );
   }
 
@@ -443,16 +433,15 @@ class LikedScreen extends StatelessWidget {
   }
 
   /// Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
+      case ButtomBarEnum.Favorite:
         return AppRoutes.likedScreen;
-      case BottomBarEnum.Home:
-        return AppRoutes.homePage;
-      case BottomBarEnum.SearchwhiteA700:
+      case ButtomBarEnum.Searchwhitea700:
         return AppRoutes.filterPage;
-      case BottomBarEnum.Lock:
+      case ButtomBarEnum.Lock:
         return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }

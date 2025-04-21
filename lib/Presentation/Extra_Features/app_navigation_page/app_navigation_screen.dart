@@ -114,6 +114,31 @@ class AppNavigationScreen extends StatelessWidget {
                             screenTitle: "Activities Category Page",
                             routeName: AppRoutes.activitiesCategoryPage,
                           ),
+                          _buildScreenTitle(
+                            context,
+                            screenTitle: "Discount Category Page",
+                            routeName: AppRoutes.discountCategoryPage,
+                          ),
+                          _buildScreenTitle(
+                            context,
+                            screenTitle: "Handy Work Category Page",
+                            routeName: AppRoutes.handyWorkCategoryPage,
+                          ),
+                          _buildScreenTitle(
+                            context,
+                            screenTitle: "Leisure Category Page",
+                            routeName: AppRoutes.leisureCategoryPage,
+                          ),
+                          _buildScreenTitle(
+                            context,
+                            screenTitle: "News Category Page",
+                            routeName: AppRoutes.newsCategoryPage,
+                          ),
+                          _buildScreenTitle(
+                            context,
+                            screenTitle: "Job Category Page",
+                            routeName: AppRoutes.jobCategoryPage,
+                          ),
                         ],
                       ),
                     ),

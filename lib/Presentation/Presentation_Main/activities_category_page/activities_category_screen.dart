@@ -3,6 +3,7 @@ import 'package:student_den/Presentation/Presentation_Main/activities_category_p
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_button.dart';
 import '../../../widgets/custom_search_view.dart';
+import '../../../widgets/custom_bottom_bar.dart';
 import 'bloc/activities_category_bloc.dart';
 import 'models/activities_category_model.dart';
 import '../../Extra_Features/offers/bloc/offers_bloc.dart';
@@ -14,8 +15,6 @@ import '../../Presentation_Main/handy_work_category_page/handy_work_category_pag
 import '../../Presentation_Main/discount_category_page/discount_category_page.dart';
 import '../../Extra_Features/offers/model/offer.dart';
 
-// Define BottomBarEnum if missing
-enum BottomBarEnum { Favorite, Home, SearchwhiteA700, Lock }
 
 // Define IconButtonStyleHelper if missing
 class IconButtonStyleHelper {
@@ -170,16 +169,24 @@ class ActivitiesCategoryScreenState extends State<ActivitiesCategoryScreen> {
     );
   }*/
 
+  Widget _buildBottomBar(BuildContext context) {
+    return CustomBottomBar(
+      onChanged: (dynamic type) {
+        Navigator.pushNamed(context, getCurrentRoute(type));
+      },
+    );
+  }
+
   /// Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
+  String getCurrentRoute(ButtomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.Favorite:
-        return AppRoutes.likedScreen; // Replace with your favorite route
-      case BottomBarEnum.SearchwhiteA700:
-        return AppRoutes.filterPage; // Replace with your search route
-      case BottomBarEnum.Lock:
-        return AppRoutes.personScreen; // Replace with your profile route
-      case BottomBarEnum.Home:
+      case ButtomBarEnum.Favorite:
+        return AppRoutes.likedScreen;
+      case ButtomBarEnum.Searchwhitea700:
+        return AppRoutes.filterPage;
+      case ButtomBarEnum.Lock:
+        return AppRoutes.personScreen;
+      case ButtomBarEnum.Home:
       default:
         return AppRoutes.homePage;
     }
