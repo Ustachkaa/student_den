@@ -1,0 +1,194 @@
+{
+  "activities": [
+    {
+      "id": "act_001",
+      "title": "Pottery Workshop",
+      "price": "30% off",
+      "description": "Have you ever tried a Pottery Workshop?\n\nUnleash your creativity and get your hands dirty in Georgia!\n\nWhether you're a beginner or just looking for a fun activity, shaping clay into ceramics is an unforgettable experience.\n\n📍 Visit Ceramic Studio Tbilisi (14 Ioane Shavteli St, Tbilisi) for beginner-friendly classes.\n\n🎓 Student discount: Present your TBC or Bank of Georgia student card at arrival for 30% off!\n\nBook now and enjoy a creative day out! ✨",
+      "image": "assets/images/Pottery.png"
+    },
+    {
+      "id": "act_002",
+      "title": "Photography Walks",
+      "price": "€20/person",
+      "description": "Ever wanted to see Tbilisi through a photographer's lens?\n\nJoin our Photography Walks and capture the soul of the city! From hidden courtyards to panoramic views, discover angles even locals miss.\n\n📍 Meet at Freedom Square fountain every Saturday at 10 AM\n\n🎓 Flash your student ID (any bank) for 25% off the walk fee!\n\nNo fancy camera? No problem – smartphone shooters welcome too! 📸",
+      "image": "assets/images/Photography.png"
+    },
+    {
+      "id": "act_003",
+      "title": "Writing Retreat",
+      "price": "Free trial session",
+      "description": "Dream of writing your novel surrounded by Georgian mountains?\n\nOur Writing Retreat gives you the perfect escape! Morning inspiration sessions, quiet writing hours, and sunset feedback circles.\n\n📍 Kakheti Vineyard Estate (transport included from Tbilisi)\n\n🎓 Students write free! Just show your ID for complimentary coffee refills ☕\n\nFirst-timer? Try our Saturday trial session – no commitment! ✍️",
+      "image": "assets/images/WritingRetreat.png"
+    },
+    {
+      "id": "act_004",
+      "title": "Museum Pass",
+      "price": "€50/year",
+      "description": "Tired of paying separately at every museum door?\n\nGet our Museum Pass and explore Georgia's treasures stress-free! Unlimited access for 7 days to 12 top cultural spots.\n\n📍 Pick up at any participating museum\n\n🎓 Exclusive student price: Just show your TBC/BoG card for 40% savings!\n\nPro tip: The pass includes free metro rides on museum days! 🚇",
+      "image": "assets/images/georgia-museum-of-art.png"
+    }
+  ],
+  "discounts": [
+    {
+      "id": "disc_001",
+      "title": "Café Beanland",
+      "offer": "20% off all drinks",
+      "rating": "4.5",
+      "description": "Need a caffeine boost during exams?\n\nEnjoy 20% off all drinks at Café Beanland – the coziest study spot in Tbilisi!\n\n📍 22 Rustaveli Ave (near metro station)\n\n🎓 Extra perk: Show your student ID after 5 PM for a free cookie with any coffee! 🍪\n\nTry their famous honey latte – it's life-changing! ☕",
+      "image": "assets/images/Cafe.png"
+    },
+    {
+      "id": "disc_002",
+      "title": "GrillSpot",
+      "offer": "Free fries with any burger",
+      "rating": "4.5",
+      "description": "Hungry after class? We've got you covered!\n\nGet FREE fries with every burger at GrillSpot – home of Georgia's juiciest patties!\n\n📍 5 Vake Street (open until 2 AM)\n\n🎓 Student special: Upgrade to cheesy fries for just ¥1 with your ID! 🧀\n\nPro tip: Their spicy adjika sauce is legendary – ask for extra! 🌶️",
+      "image": "assets/images/grillspot.png"
+    },
+    {
+      "id": "disc_003",
+      "title": "Urban Style",
+      "offer": "15% off clothing",
+      "rating": "4.9",
+      "description": "Time for a wardrobe upgrade?\n\nScore 15% off everything at Urban Style – where Georgian tradition meets streetwear!\n\n📍 Galleria Mall, 3rd floor\n\n🎓 Students get DOUBLE discount days every Wednesday! 👕👖\n\nNew collection alert: Limited-edition Tbilisi graphic teases in stock! 🎨",
+      "image": "assets/images/ClothingStore.png"
+    },
+    {
+      "id": "disc_004",
+      "title": "StudySpace",
+      "offer": "Buy 1, get 1 free coffee",
+      "rating": "4.7",
+      "description": "Study marathon ahead?\n\nFuel up with BOGO coffee at StudySpace – silent zones & superfast WiFi included!\n\n📍 17 Chavchavadze Ave (24/7 during exams)\n\n🎓 Flash your student card for free notebook and pen with any purchase! 📓\n\nBonus: Unlimited free refills on filter coffee! ♾️",
+      "image": "assets/images/Library.png"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "job_001",
+      "title": "Brand Ambassador",
+      "pay": "€12/hour + perks",
+      "rating": "4.9",
+      "description": "Love promoting cool brands?\n\nEarn €12/hour as a Brand Ambassador for student-friendly companies!\n\n📍 Flexible locations across Tbilisi\n\n🎓 Bonus: Free product samples + networking opportunities\n\nPerfect for communications/marketing students! 💼",
+      "image": "assets/images/BRAND-AMBASSADOR.png"
+    },
+    {
+      "id": "job_002",
+      "title": "Content Creator",
+      "pay": "€15/hour",
+      "rating": "4.7",
+      "description": "Got social media skills?\n\nCreate content for local businesses at €15/hour - portfolio building included!\n\n📍 Remote or in-office options\n\n🎓 Student advantage: Equipment provided if needed\n\nIdeal for photography/film students! 🎥",
+      "image": "assets/images/social-media-manager.png"
+    },
+    {
+      "id": "job_003",
+      "title": "Online Tutoring",
+      "pay": "€18/hour",
+      "rating": "4.7",
+      "description": "Strong in academics?\n\nTeach fellow students online at €18/hour - set your own schedule!\n\n📍 Fully remote\n\n🎓 Priority for STEM subjects (Math/Physics especially needed)\n\nGreat for grad students! 📚",
+      "image": "assets/images/Online-tutor.png"
+    },
+    {
+      "id": "job_004",
+      "title": "Event Staff",
+      "pay": "€14/hour",
+      "rating": "4.7",
+      "description": "Enjoy vibrant events?\n\nWork at concerts/festivals as Event Staff for €14/hour + free entry!\n\n📍 Various venues in Tbilisi\n\n🎓 Night shift bonus for student workers\n\nBest way to earn while having fun! 🎪",
+      "image": "assets/images/Event-Planner.png"
+    }
+  ],
+  "leisure_discounts": [
+    {
+      "id": "leis_001",
+      "title": "Bike Rentals",
+      "offer": "30% off",
+      "rating": "4.5",
+      "description": "Want to explore Tbilisi on two wheels?\n\nGet 30% off bike rentals all week long!\n\n📍 Pickup stations near all major universities\n\n🎓 Extra hour free with student ID\n\nHelmets and locks included! 🚲",
+      "image": "assets/images/Bike.png"
+    },
+    {
+      "id": "leis_002",
+      "title": "Cinema Tickets",
+      "offer": "50% off",
+      "rating": "4.5",
+      "description": "Movie night on a budget?\n\n50% off cinema tickets every Wednesday!\n\n📍 All major theaters included\n\n🎓 Free popcorn when you show student card\n\nEnglish subtitles available! 🎬",
+      "image": "assets/images/Popcorn.png"
+    },
+    {
+      "id": "leis_003",
+      "title": "Yoga Retreat",
+      "offer": "€50 for two days",
+      "rating": "4.9",
+      "description": "Need stress relief?\n\n€50 gets you a 2-day yoga retreat in the mountains!\n\n📍 Shuttle from Tbilisi included\n\n🎓 Meditation workshop free for students\n\nMats and meals provided! 🧘",
+      "image": "assets/images/Yoga.png"
+    },
+    {
+      "id": "leis_004",
+      "title": "Travel Deals",
+      "offer": "25% off",
+      "rating": "4.7",
+      "description": "Planning a getaway?\n\n25% off group trips to Batumi, Kazbegi & more!\n\n📍 Departures near campuses\n\n🎓 Student-only departure times available\n\nPerfect for weekend adventures! ✈️",
+      "image": "assets/images/Travel.png"
+    }
+  ],
+  "handy_work": [
+    {
+      "id": "handy_001",
+      "title": "Furniture Assembly",
+      "rate": "€25/hour",
+      "description": "IKEA furniture defeating you?\n\nGet expert assembly help for €25/hour!\n\n📍 All Tbilisi areas covered\n\n🎓 Student special: First 30 mins free!\n\nTools included - no stress! 🔧",
+      "image": "assets/images/Furniture-Assemble-Service.png"
+    },
+    {
+      "id": "handy_002",
+      "title": "Electrical Repairs",
+      "rate": "€30/hour",
+      "description": "Flickering lights?\n\nCertified electricians available for €30/hour\n\n📍 Same-day service available\n\n🎓 Student housing discounts\n\nAll repairs guaranteed! 💡",
+      "image": "assets/images/Electrical-repairs-service.png"
+    },
+    {
+      "id": "handy_003",
+      "title": "Painting Services",
+      "rate": "€50 per room",
+      "description": "Dorm room needs color?\n\nProfessional painting for €50/room\n\n📍 Eco-friendly paints available\n\n🎓 Group discount for whole apartments\n\nLeave the mess to us! 🎨",
+      "image": "assets/images/Painting-service.png"
+    },
+    {
+      "id": "handy_004",
+      "title": "Moving Help",
+      "rate": "€20/hour",
+      "description": "Changing apartments?\n\nStrong helpers for €20/hour\n\n📍 Includes transport assistance\n\n🎓 Free boxes for students\n\nWe handle heavy lifting! 📦",
+      "image": "assets/images/Movers.png"
+    }
+  ],
+  "news": [
+    {
+      "id": "news_001",
+      "title": "Free Pizza Fridays Launched Near Ilia State University",
+      "description": "Great news for hungry students! Starting this Friday, Campus Kitchen (located just 200m from Ilia State's main campus) will host **Free Pizza Fridays** – a new initiative sponsored by five local pizzerias to support students during exam season.\n\nFrom 12:00 to 15:00 every Friday, present your student ID at the counter to claim a free slice of margherita or Georgian-inspired adjika pizza. Vegan options will be available upon request. The program will run through June, with plans to extend based on participation.\n\n'We remember our student days,' says organizer Gigi Beridze of Beridze Pizzeria. 'This is our way of giving back and maybe discovering future regular customers!' \n\n📍 Where: Campus Kitchen, 3 Sandro Euli St\n⏰ When: Fridays 12:00-15:00 (while supplies last)\n🎓 Bonus: Show a TBC/Bank of Georgia student card to enter a raffle for free whole pizzas!",
+      "image": "assets/images/pizza.png",
+      "date": "2025-05-02"
+    },
+    {
+      "id": "news_002",
+      "title": "New Museum of Digital Arts Opens in Tbilisi",
+      "description": "Tbilisi's art scene gets a tech upgrade with yesterday's grand opening of **MODE** (Museum of Digital Experiences) on Aghmashenebeli Avenue. This cutting-edge space blends Georgian artistic traditions with immersive technology across 15 interactive exhibits.\n\nStudents can enjoy:\n- 50% off admission with ID\n- Free VR workshops every Thursday\n- A 'Digital Supra' exhibit where AI generates traditional feast scenes\n\nThe museum's highlight is the 'Tbilisi Through Time' tunnel, using augmented reality to show how the city evolved from the 12th century to 2125. 'We want students to see tech as creative tool,' says curator Nina Chkheidze.\n\nSpecial student nights with live coding performances will begin May 15th.\n\n📍 Address: 45 Aghmashenebeli Ave\n🕒 Hours: 11:00-20:00 (closed Tuesdays)\n🎓 Pro tip: Computer science/art students get free entry during finals week!",
+      "image": "assets/images/georgia-museum-of-art.png",
+      "date": "2025-04-28"
+    },
+    {
+      "id": "news_003",
+      "title": "Bus Line #87 Suspended After Student-Led Protest",
+      "description": "Following a week of student protests over unreliable service, Tbilisi Transport Company has temporarily suspended Bus #87 (Saburtalo-University route) until May 10th for 'system upgrades.'\n\nThe decision came after 300+ students staged a 'Books Not Brakes' sit-in at the bus depot, highlighting chronic issues:\n- 68% late arrivals last semester\n- Overcrowding during peak hours\n- Frequent breakdowns\n\nAlternative arrangements:\n🚌 Temporary Route #87A with extra buses\n🚇 Free metro transfers with student ID\n🛴 Discounted Bolt scooters near affected stops\n\nStudent council representative Mariam Lortkipanidze says negotiations continue: 'We won't accept token improvements – we need dedicated student transport solutions.'\n\n📢 Next protest: May 5th at Freedom Square\n💡 Compensation: Affected students can claim 10 free taxi vouchers at their university admin office.",
+      "image": "assets/images/bus.png",
+      "date": "2025-04-25"
+    },
+    {
+      "id": "news_004",
+      "title": "Student Political Representation Gains Momentum",
+      "description": "A coalition of Tbilisi student groups has launched the **'Our Seat at the Table'** campaign, demanding formal youth representation in Parliament. The movement gained traction after last month's education budget cuts.\n\nKey proposals include:\n- A dedicated Student Affairs Committee\n- Voting rights for university councils on education policies\n- 5 reserved parliamentary seats for under-30 representatives\n\n'Decisions about our future are made without us,' says Ilia State law student Luka Tsiklauri. Over 8,000 students have signed the petition in two weeks.\n\nThe campaign will host open debates:\n🗓 May 8th: TSU Auditorium #5 (18:00)\n🗓 May 12th: Free University Campus (16:30)\n\nOpposition MP Salome Samadashvili has pledged support, calling it 'the most organized youth initiative in a decade.'\n\n✊ How to help: Volunteer at info booths on Rustaveli Ave",
+      "image": "assets/images/Parliament.png",
+      "date": "2025-04-30"
+    }
+  ]
+}
