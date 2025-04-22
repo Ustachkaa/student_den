@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import '../../../../core/utils/firestore_service.dart';
 import '../model/offer.dart'; // Import your Offer model
 import 'dart:convert';
 
@@ -12,26 +15,32 @@ class OffersBloc extends Bloc<OffersEvent, OffersState> {
     on<LoadOffers>(_onLoadOffers);
   }
 
+
   Future<void> _onLoadOffers(LoadOffers event, Emitter<OffersState> emit) async {
     emit(OffersLoading());
+
     try {
-      // Load the JSON data from the asset file
-      final String jsonString = await rootBundle.loadString('lib/database/posts_data.json');
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
+      final firestore = FirebaseFirestore.instance;
+      final userId = FirebaseAuth.instance.currentUser?.uid;
 
-      final List<Offer> allOffers = [];
+      if (userId == null) {
+        emit(const OffersError(errorMessage: 'User not logged in.'));
+        return;
+      }
 
-      jsonData.forEach((category, items) {
-        if (items is List) {
-          for (var item in items) {
-            try {
-              allOffers.add(Offer.fromJson(item as Map<String, dynamic>, category));
-            } catch (e) {
-              print('Error parsing item in $category: $e, item: $item');
-            }
-          }
+      final likedSnapshot = await firestore.collection('users').doc(userId).get();
+      final likedPostIds = List<String>.from(likedSnapshot.data()?['likedPosts'] ?? []);
+
+      final postsSnapshot = await firestore.collection('posts').get();
+      final List<Offer> allOffers = postsSnapshot.docs.map((doc) {
+        final data = doc.data();
+        final category = data['category'] ?? 'unknown';
+        final offer = Offer.fromJson(data, category);
+        if (likedPostIds.contains(offer.id)) {
+          offer.isLiked = true;
         }
-      });
+        return offer;
+      }).toList();
 
       emit(OffersLoaded(allOffers: allOffers));
     } catch (e) {

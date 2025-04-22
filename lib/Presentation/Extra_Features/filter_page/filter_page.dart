@@ -1,6 +1,7 @@
-// search_posts_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:student_den/core/app_export.dart';
 import 'package:student_den/widgets/custom_bottom_bar.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/bloc/offers_bloc.dart';
@@ -27,16 +28,22 @@ class _SearchPostsScreenState extends State<SearchPostsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userId == null) {
+      return const Center(child: Text('You must be logged in to search and like posts.'));
+    }
+
     return Scaffold(
       backgroundColor: appTheme.whiteA700,
       appBar: AppBar(
         title: Padding(
-          padding: const EdgeInsets.only(right: 15), // Add right spacing from edge
+          padding: const EdgeInsets.only(right: 15),
           child: Container(
             height: 50,
             decoration: BoxDecoration(
-              color: const Color(0xFFF0F0F0), // Light gray fill
-              borderRadius: BorderRadius.circular(20), // Rounder edges
+              color: const Color(0xFFF0F0F0),
+              borderRadius: BorderRadius.circular(20),
             ),
             child: TextField(
               controller: _searchController,
@@ -49,7 +56,7 @@ class _SearchPostsScreenState extends State<SearchPostsScreen> {
                 contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 isDense: true,
               ),
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ),
           ),
         ),
@@ -62,9 +69,10 @@ class _SearchPostsScreenState extends State<SearchPostsScreen> {
             return const Center(child: CircularProgressIndicator());
           } else if (state is OffersLoaded) {
             final List<Offer> results = _searchOffers(state.allOffers);
+
             return results.isEmpty
                 ? const Center(child: Text('No matching posts.'))
-                : OffersGrid(offers: results, userId: '',);
+                : OffersGrid(offers: results, userId: userId);
           } else if (state is OffersError) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else {

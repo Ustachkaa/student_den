@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_den/core/app_export.dart';
@@ -7,6 +8,7 @@ import 'package:student_den/widgets/custom_bottom_bar.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/model/offer.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/widgets/offer_card.dart';
 import 'package:student_den/Presentation/Extra_Features/offers/offer_detail_page.dart';
+import '../../../core/utils/firestore_service.dart';
 import '../unified_category_screen.dart';
 import 'bloc/home_page_bloc.dart';
 import 'models/home_page_model.dart';
@@ -33,6 +35,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userId == null) {
+      return const Center(child: Text("Please log in to like posts."));
+    }
     return Scaffold(
       backgroundColor: appTheme.whiteA700,
       resizeToAvoidBottomInset: false,
@@ -48,6 +55,11 @@ class HomePage extends StatelessWidget {
                   if (state is HomePageLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is HomePageLoaded) {
+                    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+                    if (userId == null) {
+                      return const Center(child: Text("Please log in to like posts."));
+                    }
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: state.homePageModelObj.categories.map((category) {
@@ -55,7 +67,7 @@ class HomePage extends StatelessWidget {
                           categoryTitle: category.title,
                           offers: category.offers,
                           onCategoryTap: () {
-                            _navigateToCategoryPage(context, category.title.toLowerCase().replaceAll(' ', '_'));
+                            _navigateToCategoryPage(context, category.title.toLowerCase().replaceAll(' ', ''));
                           },
                           onOfferTap: (offer) {
                             Navigator.push(
@@ -64,6 +76,9 @@ class HomePage extends StatelessWidget {
                                 builder: (context) => OfferDetailPage(offer: offer),
                               ),
                             );
+                          },
+                          onLikeToggle: (offer, isNowLiked) async {
+                            await FirestoreService().toggleLike(userId, offer.id, isNowLiked);
                           },
                         );
                       }).toList(),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/offers_bloc.dart';
@@ -18,13 +19,22 @@ class CategoryOffersScreen extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is OffersLoaded) {
           final categoryOffers = _filterOffersByCategory(state.allOffers, category);
+
+          // ✅ Get the current userId from Firebase Auth
+          final userId = FirebaseAuth.instance.currentUser?.uid;
+
+          if (userId == null) {
+            // 👤 Handle unauthenticated users
+            return const Center(child: Text('Please log in to view and like offers.'));
+          }
+
           return Scaffold(
             appBar: AppBar(
               title: Text(_getCategoryTitle(category)),
             ),
             body: categoryOffers.isEmpty
                 ? const Center(child: Text('No offers in this category yet.'))
-                : OffersGrid(offers: categoryOffers, userId: '',),
+                : OffersGrid(offers: categoryOffers, userId: userId),
           );
         } else if (state is OffersError) {
           return Center(child: Text('Error: ${state.errorMessage}'));

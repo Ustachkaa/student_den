@@ -1,6 +1,6 @@
-import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../core/app_export.dart';
 import '../../Extra_Features/offers/model/offer.dart';
 import '../../Extra_Features/offers/widgets/offer_card.dart';
@@ -14,37 +14,59 @@ class LikedScreen extends StatefulWidget {
 
 class _LikedScreenState extends State<LikedScreen> {
   List<Offer> likedOffers = [];
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    loadLikedOffersFromAsset();
+    fetchLikedOffers();
   }
 
-  Future<void> loadLikedOffersFromAsset() async {
-    final jsonString = await rootBundle.loadString('lib/database/posts_data.json');
-    final data = json.decode(jsonString);
+  Future<void> fetchLikedOffers() async {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    if (userId == null) return;
 
-    final List<Offer> allOffers = [];
-    for (var category in [
-      'discounts',
-      'activities',
-      'jobs',
-      'leisure_discounts',
-      'handy_work',
-      'news'
-    ]) {
-      final items = data[category] ?? [];
-      for (final item in items) {
-        if (item['isLiked'] == true) {
-          allOffers.add(Offer.fromJson(item, category));
-        }
+    try {
+      final userDoc = await FirebaseFirestore.instance.collection('users').doc(userId).get();
+      final likedPostIds = List<String>.from(userDoc.data()?['likedPosts'] ?? []);
+
+      if (likedPostIds.isEmpty) {
+        setState(() {
+          likedOffers = [];
+          isLoading = false;
+        });
+        return;
       }
-    }
 
-    setState(() {
-      likedOffers = allOffers;
-    });
+      final postsCollection = await FirebaseFirestore.instance.collection('posts').get();
+
+      final List<Offer> offers = postsCollection.docs
+          .where((doc) => likedPostIds.contains(doc.id))
+          .map((doc) {
+        final data = doc.data();
+        return Offer(
+          id: doc.id,
+          title: data['title'],
+          description: data['description'],
+          image: data['image'],
+          price: data['price'],
+          offer: data['offer'],
+          rating: data['rating'],
+          // We no longer use isLiked field here
+        );
+      })
+          .toList();
+
+      setState(() {
+        likedOffers = offers;
+        isLoading = false;
+      });
+    } catch (e) {
+      print("🔥 Failed to fetch liked offers: $e");
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -60,7 +82,9 @@ class _LikedScreenState extends State<LikedScreen> {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       backgroundColor: appTheme.whiteA700,
-      body: Padding(
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Padding(
         padding: const EdgeInsets.all(16.0),
         child: likedOffers.isEmpty
             ? const Center(child: Text("You haven’t liked anything yet."))
@@ -68,11 +92,15 @@ class _LikedScreenState extends State<LikedScreen> {
           spacing: 12,
           runSpacing: 12,
           children: likedOffers
-              .map((offer) => OfferCard(
-            offer: offer,
-            onTap: () {},
-            onLikeToggle: (isNowLiked) {}, // You can make this unlikable if needed
-          ))
+              .map(
+                (offer) => OfferCard(
+              key: ValueKey(offer.id),
+              offer: offer,
+              onTap: () {
+                // Optionally navigate to detail screen
+              },
+            ),
+          )
               .toList(),
         ),
       ),

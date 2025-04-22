@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'model/offer.dart'; // Import your Offer model
-import 'offer_storage_service.dart'; // Import your storage service
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../core/utils/firestore_service.dart';
+import 'model/offer.dart';
 
 class OfferDetailPage extends StatefulWidget {
   final Offer offer;
@@ -13,19 +15,30 @@ class OfferDetailPage extends StatefulWidget {
 
 class _OfferDetailPageState extends State<OfferDetailPage> {
   late bool isLiked;
+  late String userId;
 
   @override
   void initState() {
     super.initState();
-    isLiked = widget.offer.isLiked!;
+
+    // Initialize user ID
+    userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    isLiked = widget.offer.isLiked ?? false;
   }
 
   void toggleLike() async {
+    if (userId.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please log in to like this post.')),
+      );
+      return;
+    }
+
     setState(() {
       isLiked = !isLiked;
     });
-    widget.offer.isLiked = isLiked; // Update model
-    await OfferStorageService().updateIsLiked(widget.offer.id, isLiked); // Persist
+
+    await FirestoreService().toggleLike(userId, widget.offer.id, isLiked);
   }
 
   @override
@@ -84,11 +97,7 @@ class _OfferDetailPageState extends State<OfferDetailPage> {
             if (offer.rating != null)
               Row(
                 children: [
-                  const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                    size: 20,
-                  ),
+                  const Icon(Icons.star, color: Colors.amber, size: 20),
                   const SizedBox(width: 4),
                   Text(
                     offer.rating!,

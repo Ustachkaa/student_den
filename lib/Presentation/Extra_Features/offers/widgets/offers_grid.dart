@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/firestore_service.dart';
+import '../bloc/offers_bloc.dart';
 import '../model/offer.dart'; // Import your Offer model
 import '../offer_detail_page.dart';
 import 'offer_card.dart'; // Import your OfferCard widget
@@ -30,6 +32,7 @@ class _OffersGridState extends State<OffersGrid> {
       itemBuilder: (context, index) {
         final offer = widget.offers[index];
         return OfferCard(
+          key: ValueKey(offer.id),
           offer: offer,
           onTap: () {
             Navigator.push(
@@ -39,13 +42,6 @@ class _OffersGridState extends State<OffersGrid> {
               ),
             );
           },
-            onLikeToggle: (isNowLiked) async {
-              setState(() {
-                offer.isLiked = isNowLiked;
-              });
-
-              await FirestoreService().toggleLike(widget.userId, offer.id, isNowLiked);
-            }
         );
       },
     );

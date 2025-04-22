@@ -1,4 +1,5 @@
 // unified_category_screen.dart
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:student_den/core/app_export.dart';
@@ -101,6 +102,12 @@ class _UnifiedCategoryScreenState extends State<UnifiedCategoryScreen> {
   }
 
   Widget _buildFilteredOffers(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
+    if (userId == null) {
+      return const Center(child: Text('Please log in to view and like posts.'));
+    }
+
     return BlocBuilder<OffersBloc, OffersState>(
       builder: (context, state) {
         if (state is OffersLoading) {
@@ -109,7 +116,7 @@ class _UnifiedCategoryScreenState extends State<UnifiedCategoryScreen> {
           final List<Offer> filteredOffers = _filterByCategory(state.allOffers);
           return filteredOffers.isEmpty
               ? const Center(child: Text("No results found."))
-              : OffersGrid(offers: filteredOffers, userId: '',);
+              : OffersGrid(offers: filteredOffers, userId: userId);
         } else if (state is OffersError) {
           return Center(child: Text('Error: ${state.errorMessage}'));
         } else {

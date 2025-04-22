@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../../../core/utils/firestore_service.dart';
 import '../model/offer.dart';
 
 class OfferCard extends StatefulWidget {
   final Offer offer;
   final VoidCallback onTap;
-  final Function(bool) onLikeToggle;
 
   const OfferCard({
     Key? key,
     required this.offer,
     required this.onTap,
-    required this.onLikeToggle,
   }) : super(key: key);
 
   @override
@@ -18,23 +18,51 @@ class OfferCard extends StatefulWidget {
 }
 
 class _OfferCardState extends State<OfferCard> {
-  late bool isLiked;
+  bool isLiked = false;
+  bool isLoading = true;
+  late String userId;
 
   @override
   void initState() {
     super.initState();
-    isLiked = widget.offer.isLiked ?? false;
+    _loadLikeStatus();
   }
 
-  void toggleLike() {
+  Future<void> _loadLikeStatus() async {
+    userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    if (userId.isEmpty) {
+      setState(() {
+        isLiked = false;
+        isLoading = false;
+      });
+      return;
+    }
+
+    final likedPosts = await FirestoreService().getLikedPosts(userId);
     setState(() {
-      isLiked = !isLiked;
+      isLiked = likedPosts.contains(widget.offer.id);
+      isLoading = false;
     });
-    widget.onLikeToggle(isLiked); // Notify parent to update the model or storage
+  }
+
+  Future<void> _toggleLike() async {
+    if (userId.isEmpty) return;
+
+    final newStatus = !isLiked;
+
+    setState(() {
+      isLiked = newStatus;
+    });
+
+    await FirestoreService().toggleLike(userId, widget.offer.id, newStatus);
+    // Optional: re-load to confirm from Firestore (redundant unless you expect inconsistencies)
+    // await _loadLikeStatus();
   }
 
   @override
   Widget build(BuildContext context) {
+    final offer = widget.offer;
+
     return InkWell(
       onTap: widget.onTap,
       child: Container(
@@ -56,11 +84,11 @@ class _OfferCardState extends State<OfferCard> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (widget.offer.image != null)
+                if (offer.image != null)
                   ClipRRect(
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                     child: Image.asset(
-                      widget.offer.image!,
+                      offer.image!,
                       height: 100,
                       width: double.infinity,
                       fit: BoxFit.cover,
@@ -76,14 +104,14 @@ class _OfferCardState extends State<OfferCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.offer.title,
+                        offer.title,
                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      if (widget.offer.offer != null)
+                      if (offer.offer != null)
                         Text(
-                          widget.offer.offer!,
+                          offer.offer!,
                           style: TextStyle(
                             color: Colors.green[600],
                             fontWeight: FontWeight.w500,
@@ -91,20 +119,20 @@ class _OfferCardState extends State<OfferCard> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                      if (widget.offer.price != null)
+                      if (offer.price != null)
                         Text(
-                          widget.offer.price!,
+                          offer.price!,
                           style: const TextStyle(fontWeight: FontWeight.w500),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       const SizedBox(height: 4),
-                      if (widget.offer.rating != null)
+                      if (offer.rating != null)
                         Row(
                           children: [
                             const Icon(Icons.star, color: Colors.amber, size: 16),
                             const SizedBox(width: 4),
-                            Text(widget.offer.rating!),
+                            Text(offer.rating!),
                           ],
                         ),
                     ],
@@ -116,7 +144,7 @@ class _OfferCardState extends State<OfferCard> {
               right: 8,
               bottom: 8,
               child: GestureDetector(
-                onTap: toggleLike,
+                onTap: _toggleLike,
                 child: Icon(
                   isLiked ? Icons.favorite : Icons.favorite_border,
                   color: isLiked ? Colors.red : Colors.grey,

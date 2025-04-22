@@ -9,12 +9,16 @@ class HomeCategorySection extends StatelessWidget {
   final VoidCallback onCategoryTap;
   final Function(Offer) onOfferTap;
 
+  // ✅ Add this:
+  final Function(Offer, bool)? onLikeToggle;
+
   const HomeCategorySection({
     Key? key,
     required this.categoryTitle,
     this.offers = const [],
     required this.onCategoryTap,
     required this.onOfferTap,
+    this.onLikeToggle, // ✅ include in constructor
   }) : super(key: key);
 
   @override
@@ -42,7 +46,7 @@ class HomeCategorySection extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           SizedBox(
-            height: 200.h, // Adjust height as needed
+            height: 200.h,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: offers.length,
@@ -50,8 +54,9 @@ class HomeCategorySection extends StatelessWidget {
               itemBuilder: (context, index) {
                 final offer = offers[index];
                 return OfferCard(
+                  key: ValueKey(offer.id), // ✅ ensures this card is unique
                   offer: offer,
-                  onTap: () => onOfferTap(offer), onLikeToggle: (bool ) {  },
+                  onTap: () => onOfferTap(offer),
                 );
               },
             ),
