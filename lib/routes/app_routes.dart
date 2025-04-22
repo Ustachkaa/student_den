@@ -37,7 +37,7 @@ class AppRoutes {
     likedScreen: (context) => const LikedScreen(),
     filterPage: SearchPostsScreen.builder,
     personScreen: PersonScreen.builder,
-    settingsPage: SettingsPage.builder, // Added
+    settingsPage: (context) => const SettingsPage(), // Added
     initialRoute: PreLoginScreen.builder,
   };
 }
