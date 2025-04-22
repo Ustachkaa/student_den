@@ -79,7 +79,7 @@
       "rating": "4.9",
       "description": "Love promoting cool brands?\n\nEarn €12/hour as a Brand Ambassador for student-friendly companies!\n\n📍 Flexible locations across Tbilisi\n\n🎓 Bonus: Free product samples + networking opportunities\n\nPerfect for communications/marketing students! 💼",
       "image": "assets/images/BRAND-AMBASSADOR.png",
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": "job_002",
@@ -88,7 +88,7 @@
       "rating": "4.7",
       "description": "Got social media skills?\n\nCreate content for local businesses at €15/hour - portfolio building included!\n\n📍 Remote or in-office options\n\n🎓 Student advantage: Equipment provided if needed\n\nIdeal for photography/film students! 🎥",
       "image": "assets/images/social-media-manager.png",
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": "job_003",
@@ -97,7 +97,7 @@
       "rating": "4.7",
       "description": "Strong in academics?\n\nTeach fellow students online at €18/hour - set your own schedule!\n\n📍 Fully remote\n\n🎓 Priority for STEM subjects (Math/Physics especially needed)\n\nGreat for grad students! 📚",
       "image": "assets/images/Online-tutor.png",
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": "job_004",
@@ -126,7 +126,7 @@
       "rating": "4.5",
       "description": "Movie night on a budget?\n\n50% off cinema tickets every Wednesday!\n\n📍 All major theaters included\n\n🎓 Free popcorn when you show student card\n\nEnglish subtitles available! 🎬",
       "image": "assets/images/Popcorn.png",
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": "leis_003",

@@ -64,7 +64,7 @@ class _SearchPostsScreenState extends State<SearchPostsScreen> {
             final List<Offer> results = _searchOffers(state.allOffers);
             return results.isEmpty
                 ? const Center(child: Text('No matching posts.'))
-                : OffersGrid(offers: results);
+                : OffersGrid(offers: results, userId: '',);
           } else if (state is OffersError) {
             return Center(child: Text('Error: ${state.errorMessage}'));
           } else {

@@ -24,7 +24,7 @@ class CategoryOffersScreen extends StatelessWidget {
             ),
             body: categoryOffers.isEmpty
                 ? const Center(child: Text('No offers in this category yet.'))
-                : OffersGrid(offers: categoryOffers),
+                : OffersGrid(offers: categoryOffers, userId: '',),
           );
         } else if (state is OffersError) {
           return Center(child: Text('Error: ${state.errorMessage}'));

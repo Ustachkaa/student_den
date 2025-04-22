@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/utils/firestore_service.dart';
 import '../model/offer.dart'; // Import your Offer model
 import '../offer_detail_page.dart';
 import 'offer_card.dart'; // Import your OfferCard widget
@@ -6,8 +7,9 @@ import '../offer_storage_service.dart';
 
 class OffersGrid extends StatefulWidget {
   final List<Offer> offers;
+  final String userId;
 
-  const OffersGrid({Key? key, required this.offers}) : super(key: key);
+  const OffersGrid({Key? key, required this.offers, required this.userId}) : super(key: key);
 
   @override
   State<OffersGrid> createState() => _OffersGridState();
@@ -42,10 +44,7 @@ class _OffersGridState extends State<OffersGrid> {
                 offer.isLiked = isNowLiked;
               });
 
-              final path = await OfferStorageService().getLocalFilePath();
-              print("📄 Using file: $path");
-
-              await OfferStorageService().updateIsLiked(offer.id, isNowLiked);
+              await FirestoreService().toggleLike(widget.userId, offer.id, isNowLiked);
             }
         );
       },

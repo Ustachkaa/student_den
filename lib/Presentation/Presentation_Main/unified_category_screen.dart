@@ -109,7 +109,7 @@ class _UnifiedCategoryScreenState extends State<UnifiedCategoryScreen> {
           final List<Offer> filteredOffers = _filterByCategory(state.allOffers);
           return filteredOffers.isEmpty
               ? const Center(child: Text("No results found."))
-              : OffersGrid(offers: filteredOffers);
+              : OffersGrid(offers: filteredOffers, userId: '',);
         } else if (state is OffersError) {
           return Center(child: Text('Error: ${state.errorMessage}'));
         } else {
