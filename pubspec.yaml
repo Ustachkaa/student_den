@@ -20,6 +20,7 @@ dependencies:
   shared_preferences: ^2.2.2
   connectivity_plus: ^3.0.0
   responsive_grid_list: ^1.4.0
+  path_provider: ^2.1.2
   # Firebase dependencies (latest as of April 2025)
   firebase_core: ^3.13.0
   firebase_auth: ^5.5.2

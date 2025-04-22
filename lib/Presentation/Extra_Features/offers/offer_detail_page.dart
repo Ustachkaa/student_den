@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
 import 'model/offer.dart'; // Import your Offer model
+import 'offer_storage_service.dart'; // Import your storage service
 
-class OfferDetailPage extends StatelessWidget {
+class OfferDetailPage extends StatefulWidget {
   final Offer offer;
 
   const OfferDetailPage({Key? key, required this.offer}) : super(key: key);
 
   @override
+  State<OfferDetailPage> createState() => _OfferDetailPageState();
+}
+
+class _OfferDetailPageState extends State<OfferDetailPage> {
+  late bool isLiked;
+
+  @override
+  void initState() {
+    super.initState();
+    isLiked = widget.offer.isLiked!;
+  }
+
+  void toggleLike() async {
+    setState(() {
+      isLiked = !isLiked;
+    });
+    widget.offer.isLiked = isLiked; // Update model
+    await OfferStorageService().updateIsLiked(widget.offer.id, isLiked); // Persist
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final offer = widget.offer;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(offer.title),
@@ -21,7 +45,7 @@ class OfferDetailPage extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  offer.image!, // Replace with NetworkImage if needed
+                  offer.image!,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
@@ -35,7 +59,7 @@ class OfferDetailPage extends StatelessWidget {
               ),
             const SizedBox(height: 16),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Text(
@@ -46,23 +70,32 @@ class OfferDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (offer.rating != null)
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        offer.rating!,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: toggleLike,
+                  child: Icon(
+                    isLiked ? Icons.favorite : Icons.favorite_border,
+                    color: isLiked ? Colors.red : Colors.grey,
+                    size: 28,
                   ),
+                ),
               ],
             ),
+            const SizedBox(height: 8),
+            if (offer.rating != null)
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    offer.rating!,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
             const SizedBox(height: 16),
             if (offer.offer != null)
               Text(

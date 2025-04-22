@@ -34,8 +34,8 @@ class AppRoutes {
     loginPage: LoginScreen.builder,
     preLoginPage: PreLoginScreen.builder,
     homePage: HomePage.builder,
-    likedScreen: LikedScreen.builder,
-    filterPage: FilterPage.builder,
+    likedScreen: (context) => const LikedScreen(),
+    filterPage: SearchPostsScreen.builder,
     personScreen: PersonScreen.builder,
     settingsPage: SettingsPage.builder, // Added
     initialRoute: PreLoginScreen.builder,

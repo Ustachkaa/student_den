@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'Presentation/Extra_Features/offers/offer_storage_service.dart';
+import 'core/utils/json_file_utils.dart';
 import 'firebase_options.dart';
 import 'core/app_export.dart';
 
@@ -9,7 +11,7 @@ var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await copyInitialJsonIfNeeded();
   // Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

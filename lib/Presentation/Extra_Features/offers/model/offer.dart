@@ -6,6 +6,7 @@ class Offer {
   final String? rating;
   final String? image;
   final String? description;
+  bool? isLiked;
 
   Offer({
     required this.id,
@@ -15,6 +16,7 @@ class Offer {
     this.rating,
     this.image,
     this.description,
+    this.isLiked = false,
   });
 
   String get safeId => id?.toLowerCase() ?? '';
@@ -29,6 +31,7 @@ class Offer {
           rating: json['rating'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       case 'activities':
         return Offer(
@@ -37,6 +40,7 @@ class Offer {
           price: json['price'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       case 'jobs':
         return Offer(
@@ -46,6 +50,7 @@ class Offer {
           rating: json['rating'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       case 'leisure_discounts':
         return Offer(
@@ -55,6 +60,7 @@ class Offer {
           rating: json['rating'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       case 'handy_work':
         return Offer(
@@ -63,6 +69,7 @@ class Offer {
           price: json['rate'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       case 'news':
         return Offer(
@@ -70,9 +77,22 @@ class Offer {
           title: json['title'],
           image: json['image'],
           description: json['description'],
+          isLiked: json['isLiked'] ?? false,
         );
       default:
         throw ArgumentError('Unknown category: $category');
     }
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'price': price,
+    'offer': offer,
+    'description': description,
+    'image': image,
+    'rating': rating,
+    'isLiked': isLiked,
+  };
+
 }

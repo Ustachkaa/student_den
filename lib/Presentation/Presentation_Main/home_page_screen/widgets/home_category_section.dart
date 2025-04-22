@@ -51,7 +51,7 @@ class HomeCategorySection extends StatelessWidget {
                 final offer = offers[index];
                 return OfferCard(
                   offer: offer,
-                  onTap: () => onOfferTap(offer),
+                  onTap: () => onOfferTap(offer), onLikeToggle: (bool ) {  },
                 );
               },
             ),
